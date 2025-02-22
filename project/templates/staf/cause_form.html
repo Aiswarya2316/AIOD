@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Cause - AIOD</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #2c3e50;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background: #1abc9c;
+            border-radius: 5px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 26px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: left;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #1abc9c;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(26, 188, 156, 0.5);
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #16a085;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .navbar ul li a {
+                display: block;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">AIOD</div>
+        <ul>
+            <li><a href="../stafhome">Home</a></li>
+            <li><a href="../causes">Causes</a></li>
+            <li><a href="../causesadd">Add Cause</a></li>
+            <li><a href="../categories">Categories</a></li>
+            <li><a href="../categoriesadd">Add Category</a></li>
+            <li><a href="../logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Form Section -->
+    <div class="container">
+        <h2>Add New Cause</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label>Category:</label>
+            {{ form.category }}
+            
+            <label>Title:</label>
+            {{ form.title }}
+            
+            <label>Description:</label>
+            {{ form.description }}
+            
+            <label>Target Amount ($):</label>
+            {{ form.target_amount }}
+            
+            <button type="submit">Save Cause</button>
+        </form>
+    </div>
+
+</body>
+</html>

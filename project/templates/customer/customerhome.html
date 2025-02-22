@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Hub - Give with Love</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(to right, #0a192f, #112240, #1c3a5e);
+            color: white;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00e6e6;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00e6e6;
+        }
+
+        .donate-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #00e6e6, #0077b6);
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .donate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(0, 230, 230, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #00e6e6;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            margin-top: 20px;
+            padding: 14px 28px;
+            font-size: 18px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #00e6e6, #0077b6);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(0, 230, 230, 0.5);
+        }
+
+        /* Impact Section */
+        .impact {
+            padding: 80px 10%;
+            text-align: center;
+        }
+
+        .impact h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #00e6e6;
+        }
+
+        .impact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .impact-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 12px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .impact-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .impact-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">AIOD</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#impact">Impact</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <li><a href="../logout"><button class="donate-btn">Logout</button></a></li>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Give with Love, Change a Life</h1>
+        <p>Your donations make a difference. Help those in need by giving what you can.</p>
+        <button class="cta-btn">Start Donating</button>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="impact">
+        <h2>Our Impact</h2>
+        <div class="impact-grid">
+            <div class="impact-card">
+                <h3>10,000+ Items Donated</h3>
+                <p>We've helped thousands of people get the resources they need.</p>
+            </div>
+            <div class="impact-card">
+                <h3>500+ Volunteers</h3>
+                <p>Our dedicated volunteers ensure your donations reach the right hands.</p>
+            </div>
+            <div class="impact-card">
+                <h3>100+ Communities Supported</h3>
+                <p>Making a real impact in communities worldwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <p>&copy; 2025 AIOD. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

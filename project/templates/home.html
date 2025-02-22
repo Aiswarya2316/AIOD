@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIOD - All-in-One Donation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('../static/I_Save_Life_Blog_Banner_25_c3f8d7a20b.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dark Overlay for Better Readability */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* Glassmorphism Navbar */
+        nav {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            padding: 14px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.15);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #8a2be2; /* Violet Hover Effect */
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .content {
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 58px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
+            letter-spacing: 1.5px;
+        }
+
+        .content p {
+            font-size: 18px;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Call-to-Action Button */
+        .get-started-btn {
+            padding: 16px 42px;
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #8a2be2, #6a0dad);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 5px 20px rgba(138, 43, 226, 0.4);
+            text-transform: uppercase;
+        }
+
+        .get-started-btn:hover {
+            background: linear-gradient(45deg, #6a0dad, #4b0082);
+            transform: translateY(-4px);
+            box-shadow: 0px 8px 25px rgba(75, 0, 130, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 12px 30px;
+                text-align: center;
+            }
+
+            .content h1 {
+                font-size: 42px;
+            }
+
+            .get-started-btn {
+                padding: 14px 34px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="../registeradmin">Admin</a>
+        <a href="../registerstaf">Signup as Band</a>
+        <a href="../registerparent">Signup as Customer</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to AIOD</h1>
+        <p>The ultimate platform where generosity meets simplicity. Support causes that matter and make a difference today.</p>
+        <a href="../login"><button class="get-started-btn">Get Started</button></a>
+    </div>
+
+</body>
+</html>

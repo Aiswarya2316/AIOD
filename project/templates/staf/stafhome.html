@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #2c3e50;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background: #1abc9c;
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: url('https://source.unsplash.com/1600x900/?charity,help') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .hero .btn {
+            background: #1abc9c;
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .hero .btn:hover {
+            background: #16a085;
+        }
+
+        /* About Section */
+        .about {
+            max-width: 1100px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .about h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .about p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* Causes Section */
+        .causes {
+            background: #ecf0f1;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .causes h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .cause-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .cause {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cause img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .cause h3 {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #2c3e50;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            max-width: 1100px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .testimonials h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer .socials a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .footer .socials a:hover {
+            color: #1abc9c;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">AIOD</div>
+        <ul>
+            <li><a href="../stafhome">Home</a></li>
+            <li><a href="../causes">Causes</a></li>
+            <li><a href="../causesadd">Add Causes</a></li>
+            <li><a href="../categories">Category</a></li>
+            <li><a href="../categoriesadd">Add category</a></li>
+            <li><a href="../logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Make a Difference in Someone’s Life</h1>
+        <p>Your donation can help provide food, education, and medical care to those in need.</p>
+        <button class="btn">Donate Now</button>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>About Our NGO</h2>
+        <p>We are a non-profit organization dedicated to helping underprivileged communities by providing food, shelter, education, and healthcare.</p>
+    </section>
+
+    <!-- Causes Section -->
+    <section class="causes">
+        <h2>Our Causes</h2>
+        <div class="cause-container">
+            <div class="cause">
+                <img src="https://source.unsplash.com/400x300/?education,school" alt="Cause 1">
+                <h3>Education for All</h3>
+            </div>
+            <div class="cause">
+                <img src="https://source.unsplash.com/400x300/?healthcare,hospital" alt="Cause 2">
+                <h3>Healthcare Support</h3>
+            </div>
+            <div class="cause">
+                <img src="https://source.unsplash.com/400x300/?food,hunger" alt="Cause 3">
+                <h3>Food for the Needy</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2>What People Say</h2>
+        <div class="testimonial">
+            <p>"This NGO has changed so many lives! The work they do is incredible."</p>
+            <h4>- Donor Name</h4>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Contact: info@ngo.org | Phone: +123 456 7890</p>
+        <div class="socials">
+            <a href="#">FB</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+    </div>
+
+</body>
+</html>
