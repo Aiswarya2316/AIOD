@@ -3,177 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NGO - Home</title>
+    <title>AIOD - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
         body {
-            background: #f4f4f9;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
             color: #333;
         }
 
         /* Navbar */
         .navbar {
-            background: #2c3e50;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: #2c3e50;
         }
-
-        .navbar .logo {
-            font-size: 24px;
+        .navbar-brand {
             font-weight: bold;
         }
-
-        .navbar ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar ul li {
-            display: inline;
-        }
-
-        .navbar ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 8px 12px;
-            transition: 0.3s;
-        }
-
-        .navbar ul li a:hover {
-            background: #1abc9c;
-            border-radius: 5px;
+        .nav-link:hover {
+            color: #1abc9c !important;
         }
 
         /* Hero Section */
         .hero {
+            background: url('../static/images.jpg') no-repeat center center/cover;
             height: 80vh;
-            background: url('https://source.unsplash.com/1600x900/?charity,help') no-repeat center center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
             text-align: center;
-            color: white;
-            padding: 20px;
+            position: relative;
         }
-
-        .hero h1 {
-            font-size: 42px;
-            font-weight: bold;
-            margin-bottom: 15px;
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.6);
         }
-
-        .hero p {
-            font-size: 20px;
+        .hero .content {
+            position: relative;
+            z-index: 1;
+            color: black;
             max-width: 600px;
-            margin-bottom: 20px;
         }
-
         .hero .btn {
             background: #1abc9c;
             color: white;
-            padding: 12px 20px;
+            padding: 12px 25px;
             font-size: 18px;
-            border: none;
             border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
         }
-
         .hero .btn:hover {
             background: #16a085;
         }
 
         /* About Section */
         .about {
-            max-width: 1100px;
-            margin: 50px auto;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .about h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-
-        .about p {
-            font-size: 18px;
-            line-height: 1.6;
+            padding: 50px 15px;
         }
 
         /* Causes Section */
-        .causes {
-            background: #ecf0f1;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .causes h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-
-        .cause-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .cause {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
         .cause img {
             width: 100%;
             border-radius: 10px;
         }
-
         .cause h3 {
-            margin-top: 10px;
-            font-size: 20px;
-            color: #2c3e50;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            max-width: 1100px;
-            margin: 50px auto;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .testimonials h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-
-        .testimonial {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
+            margin-top: 15px;
         }
 
         /* Footer */
@@ -182,98 +78,93 @@
             color: white;
             text-align: center;
             padding: 20px;
-            margin-top: 50px;
         }
-
-        .footer p {
-            margin-bottom: 10px;
-        }
-
         .footer .socials a {
             color: white;
             margin: 0 10px;
             font-size: 20px;
-            transition: 0.3s;
         }
-
         .footer .socials a:hover {
             color: #1abc9c;
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-            }
         }
     </style>
 </head>
 <body>
-
+    
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">AIOD</div>
-        <ul>
-            <li><a href="../stafhome">Home</a></li>
-            <li><a href="../causes">Causes</a></li>
-            <li><a href="../causesadd">Add Causes</a></li>
-            <li><a href="../categories">Category</a></li>
-            <li><a href="../categoriesadd">Add category</a></li>
-            <li><a href="../donations">Donated Lists</a></li>
-            <li><a href="../logout">Logout</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">AIOD</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../stafhome">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../causes">Causes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../causesadd">Add Causes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../categories">Category</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../categoriesadd">Add Category</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../donations">Donated Lists</a></li>
+                    <li class="nav-item"><a class="nav-link text-danger" href="../logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <h1>Make a Difference in Someone’s Life</h1>
-        <p>Your donation can help provide food, education, and medical care to those in need.</p>
-        <button class="btn">Donate Now</button>
-    </section>
-
-    <!-- About Section -->
-    <section class="about">
-        <h2>About Our NGO</h2>
-        <p>We are a non-profit organization dedicated to helping underprivileged communities by providing food, shelter, education, and healthcare.</p>
-    </section>
-
-    <!-- Causes Section -->
-    <section class="causes">
-        <h2>Our Causes</h2>
-        <div class="cause-container">
-            <div class="cause">
-                <img src="https://source.unsplash.com/400x300/?education,school" alt="Cause 1">
-                <h3>Education for All</h3>
-            </div>
-            <div class="cause">
-                <img src="https://source.unsplash.com/400x300/?healthcare,hospital" alt="Cause 2">
-                <h3>Healthcare Support</h3>
-            </div>
-            <div class="cause">
-                <img src="https://source.unsplash.com/400x300/?food,hunger" alt="Cause 3">
-                <h3>Food for the Needy</h3>
-            </div>
+    <section class="hero d-flex flex-column">
+        <div class="content">
+            <h1>Make a Difference in Someone’s Life</h1>
+            <p>Your donation can help provide food, education, and medical care to those in need.</p>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <h2>What People Say</h2>
-        <div class="testimonial">
-            <p>"This NGO has changed so many lives! The work they do is incredible."</p>
-            <h4>- Donor Name</h4>
+    <!-- About Section -->
+    <section class="about text-center">
+        <div class="container">
+            <h2>About Our NGO</h2>
+            <p>We are a non-profit organization dedicated to helping underprivileged communities by providing food, shelter, education, and healthcare.</p>
+        </div>
+    </section>
+
+    <!-- Causes Section -->
+    <section class="causes bg-light py-5">
+        <div class="container text-center">
+            <h2>Our Causes</h2>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="cause">
+                        <img src="../static/download (2).jpg" alt="Education">
+                        <h3>Education for All</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="cause">
+                        <img src="../static/70136775.webp" alt="Healthcare">
+                        <h3>Healthcare Support</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="cause">
+                        <img src="../static/download.png" alt="Food">
+                        <h3>Food for the Needy</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <div class="footer">
+    <footer class="footer">
         <p>Contact: info@ngo.org | Phone: +123 456 7890</p>
         <div class="socials">
-            <a href="#">FB</a>
-            <a href="#">Twitter</a>
-            <a href="#">Instagram</a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
-    </div>
+    </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

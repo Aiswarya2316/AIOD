@@ -108,6 +108,30 @@ def stafhome(request):
     return render(request,'staf/stafhome.html')
 
 
+from django.shortcuts import render
+from django.db.models import Sum, Count
+from .models import Donation, Customer, Cause
+
+def adminhome(request):
+    total_donations = Donation.objects.aggregate(total=Sum('amount'))['total'] or 0
+    total_donors = Donation.objects.values('donor_email').distinct().count()
+    total_causes = Cause.objects.count()
+    total_customers = Customer.objects.count()
+
+    donations = Donation.objects.all().order_by('-date')
+
+    context = {
+        'total_donations': total_donations,
+        'total_donors': total_donors,
+        'total_causes': total_causes,
+        'total_customers': total_customers,
+        'donations': donations,
+    }
+
+    return render(request, 'admin/adminhome.html', context)
+
+
+
 
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -284,3 +308,39 @@ def cause_list(request, category_id=None):
         'causes': causes,
         'selected_category': selected_category
     })
+
+
+
+
+from django.shortcuts import render
+from .models import Donation
+
+def view_donations(request):
+    donations = Donation.objects.all().order_by('-date')  # Fetch all donations in descending order
+
+    context = {
+        'donations': donations
+    }
+    return render(request, 'admin/donations.html', context)
+
+
+
+
+
+from django.shortcuts import render
+from .models import Customer
+
+def customer_list(request):
+    customers = Customer.objects.all()
+    return render(request, 'admin/customers.html', {'customers': customers})
+
+
+
+
+from django.shortcuts import render
+from .models import Cause
+
+def all_causes(request):
+    causes = Cause.objects.all()
+    return render(request, 'admin/causes_list.html', {'causes': causes})
+

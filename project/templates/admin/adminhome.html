@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Donations</title>
+    
+    <!-- Bootstrap & FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f9;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #212529;
+            color: white;
+            padding: 20px;
+        }
+        .sidebar h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .sidebar a {
+            color: white;
+            display: block;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background: #343a40;
+        }
+        .sidebar .btn-danger {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .stats-card h3 {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .stats-card i {
+            font-size: 2rem;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Admin Dashboard</h3>
+        <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="{% url 'view_donations' %}"><i class="fas fa-hand-holding-usd"></i> Donations</a>
+        <a href="../customers"><i class="fas fa-users"></i> Donors</a>
+        <a href="{% url 'all_causes' %}"><i class="fas fa-project-diagram"></i> Causes</a>
+        <a href="../logout" class="btn btn-danger mt-3"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="container">
+            
+            <!-- Statistics Cards -->
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-dollar-sign text-primary"></i>
+                        <h3>${{ total_donations }}</h3>
+                        <p>Total Donations</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-users text-success"></i>
+                        <h3>{{ total_donors }}</h3>
+                        <p>Total Donors</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-folder text-warning"></i>
+                        <h3>{{ total_causes }}</h3>
+                        <p>Active Causes</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-user text-info"></i>
+                        <h3>{{ total_customers }}</h3>
+                        <p>Total Customers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="row mt-4">
+                <div class="col-lg-12">
+                    <div class="chart-container">
+                        <h5 class="text-center">Donations Over Time</h5>
+                        <canvas id="donationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Chart Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('donationChart').getContext('2d');
+            var donationChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for donation in donations %} "{{ donation.date|date:'M d' }}", {% endfor %}],
+                    datasets: [{
+                        label: 'Donations ($)',
+                        data: [{% for donation in donations %} {{ donation.amount }}, {% endfor %}],
+                        backgroundColor: 'rgba(0, 123, 255, 0.7)',
+                        borderColor: 'rgba(0, 86, 179, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Donations</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: #343a40;
+            padding: 20px;
+            color: white;
+        }
+        .sidebar h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background: #495057;
+        }
+        .sidebar .btn-logout {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 270px;
+            padding: 20px;
+        }
+
+        /* Table Styling */
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table th {
+            background: #007bff;
+            color: white;
+            text-align: center;
+        }
+        .table td {
+            text-align: center;
+        }
+        .table tbody tr:hover {
+            background: #f1f1f1;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Admin Dashboard</h3>
+        <a href="../adminhome"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="{% url 'view_donations' %}"><i class="fas fa-hand-holding-usd"></i> Donations</a>
+        <a href="../customers"><i class="fas fa-users"></i> Donors</a>
+        <a href="{% url 'all_causes' %}"><i class="fas fa-project-diagram"></i> Causes</a>
+        <a href="../logout" class="btn btn-danger btn-logout mt-3"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h2 class="mb-4 text-center">Donations List</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Donor Name</th>
+                            <th>Email</th>
+                            <th>Category</th>
+                            <th>Cause</th>
+                            <th>Amount ($)</th>
+                            <th>Date</th>
+                            <th>Payment Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for donation in donations %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ donation.donor_name }}</td>
+                            <td>{{ donation.donor_email }}</td>
+                            <td>{{ donation.category.name }}</td>
+                            <td>{{ donation.cause.title }}</td>
+                            <td>${{ donation.amount }}</td>
+                            <td>{{ donation.date|date:"Y-m-d H:i" }}</td>
+                            <td>
+                                {% if donation.payment_status %}
+                                    <span class="badge bg-success">Paid</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Unpaid</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center">No donations available</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

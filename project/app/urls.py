@@ -9,6 +9,7 @@ urlpatterns = [
         path("logout/", views.user_logout, name="logout"),
         path('customerhome',views.customerhome,name='customerhome'),
         path('stafhome',views.stafhome,name='stafhome'),
+        path('adminhome',views.adminhome,name='adminhome'),
         path('categories/', views.category_list, name='category_list'),
         path('categoriesadd/', views.add_category, name='add_category'),
         path('causes/', views.cause_list, name='cause_list'),
@@ -21,6 +22,9 @@ urlpatterns = [
         path('verify-payment/', views.verify_payment, name='verify_payment'),
         path('causes/', views.cause_list, name='cause_list'),
         path('causes/category/<int:category_id>/', views.cause_list, name='cause_by_category'),
+        path('donationss/', views.view_donations, name='view_donations'),
+        path('customers/', views.customer_list, name='customer_list'),
+        path('causess/', views.all_causes, name='all_causes'),
 
 ]
 
