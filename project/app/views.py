@@ -143,3 +143,144 @@ def add_cause(request):
     else:
         form = CauseForm()
     return render(request, 'staf/cause_form.html', {'form': form})
+
+
+
+
+from django.shortcuts import render, redirect
+from .models import Donation, Cause, Customer
+from .forms import DonationForm
+
+def donate(request):
+    if request.method == "POST":
+        form = DonationForm(request.POST)
+        if form.is_valid():
+            donation = form.save()
+            
+            # Update raised_amount in the selected cause
+            donation.cause.raised_amount += donation.amount
+            donation.cause.save()
+
+            return redirect('donation_success')  # Redirect to a success page
+    else:
+        form = DonationForm()
+
+    return render(request, "customer/donate.html", {"form": form})
+
+def donation_success(request):
+    return render(request, "customer/donation_success.html")
+
+def donation_history(request):
+    donations = Donation.objects.all()  # Fetch all donations
+    return render(request, "customer/donation_history.html", {"donations": donations})
+
+
+from django.shortcuts import render
+from .models import Donation
+
+def donation_list(request):
+    status = request.GET.get('status', 'all')
+
+    if status == 'paid':
+        donations = Donation.objects.filter(payment_status=True).order_by('-date')
+    elif status == 'pending':
+        donations = Donation.objects.filter(payment_status=False).order_by('-date')
+    else:
+        donations = Donation.objects.all().order_by('payment_status', '-date')
+
+    return render(request, 'staf/donation_list.html', {'donations': donations, 'status': status})
+
+
+
+
+
+
+
+import razorpay
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from .models import Donation
+
+# Initialize Razorpay client
+razorpay_client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+def create_payment(request, donation_id):
+    donation = get_object_or_404(Donation, id=donation_id)
+    
+    # Create Razorpay Order
+    order_data = {
+        "amount": int(donation.amount * 100),  # Convert to paisa
+        "currency": "INR",
+        "payment_capture": "1",  # Auto capture payment
+    }
+    order = razorpay_client.order.create(order_data)
+    
+    # Save order ID in the model
+    donation.razorpay_order_id = order["id"]
+    donation.save()
+    
+    return JsonResponse({
+        "order_id": order["id"],
+        "amount": donation.amount,
+        "currency": "INR",
+        "key": settings.RAZORPAY_KEY_ID,
+        "donor_name": donation.donor_name,
+        "donor_email": donation.donor_email,
+    })
+
+
+
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@csrf_exempt
+def verify_payment(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        razorpay_order_id = data.get("order_id")
+        razorpay_payment_id = data.get("payment_id")
+        razorpay_signature = data.get("signature")
+
+        try:
+            # Verify payment signature
+            params_dict = {
+                "razorpay_order_id": razorpay_order_id,
+                "razorpay_payment_id": razorpay_payment_id,
+                "razorpay_signature": razorpay_signature
+            }
+            razorpay_client.utility.verify_payment_signature(params_dict)
+
+            # Update donation status
+            donation = Donation.objects.get(razorpay_order_id=razorpay_order_id)
+            donation.payment_status = True
+            donation.save()
+
+            return JsonResponse({"success": True, "message": "Payment successful!"})
+
+        except:
+            return JsonResponse({"success": False, "message": "Payment verification failed."})
+
+
+
+
+
+
+
+from django.shortcuts import render, get_object_or_404
+from .models import Category, Cause
+
+def cause_list(request, category_id=None):
+    categories = Category.objects.all()
+    if category_id:
+        selected_category = get_object_or_404(Category, id=category_id)
+        causes = Cause.objects.filter(category=selected_category)
+    else:
+        selected_category = None
+        causes = Cause.objects.all()
+    
+    return render(request, 'customer/cause_list.html', {
+        'categories': categories,
+        'causes': causes,
+        'selected_category': selected_category
+    })

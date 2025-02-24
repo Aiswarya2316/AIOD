@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Success - AIOD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #007bff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .donate-btn {
+            background: #ff5722;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .donate-btn:hover {
+            background: #e64a19;
+        }
+
+        /* Success Message */
+        .container {
+            background: white;
+            padding: 40px;
+            max-width: 600px;
+            margin: 60px auto;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .container h2 {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 28px;
+        }
+        .container p {
+            font-size: 16px;
+            color: #333;
+        }
+        .btn-primary, .btn-secondary {
+            width: 48%;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">AIOD</div>
+        <ul class="nav-links">
+            <li><a href="{% url 'customerhome' %}">Home</a></li>
+            <li><a href="{% url 'donate' %}">Donate</a></li>
+            <li><a href="../causes">Causes</a></li>
+            <li><a href="{% url 'donation_history' %}" class="btn btn-warning">Donation History</a></li>
+        </ul>
+        <a href="{% url 'logout' %}"><button class="donate-btn">Logout</button></a>
+    </nav>
+
+    <!-- Success Message Section -->
+    {% block content %}
+    <div class="container">
+        <h2><i class="fas fa-heart"></i> Thank You for Your Donation! <i class="fas fa-heart"></i></h2>
+        <p>Your generosity helps change lives. We truly appreciate your support!</p>
+        <a href="{% url 'donate' %}" class="btn btn-primary"><i class="fas fa-hand-holding-heart"></i> Donate Again</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary"><i class="fas fa-home"></i> Back to Home</a>
+    </div>
+    {% endblock %}
+
+</body>
+</html>

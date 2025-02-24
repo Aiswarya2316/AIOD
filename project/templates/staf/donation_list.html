@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* General Styling */
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        /* Table Styling */
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table td {
+            text-align: center;
+        }
+
+        /* Payment Status */
+        .paid {
+            background-color: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background-color: #dc3545;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Filter Dropdown */
+        .filter-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .filter-container select {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">AIOD</div>
+        <ul>
+            <li><a href="../stafhome">Home</a></li>
+            <li><a href="../causes">Causes</a></li>
+            <li><a href="../causesadd">Add Causes</a></li>
+            <li><a href="../categories">Category</a></li>
+            <li><a href="../categoriesadd">Add Category</a></li>
+            <li><a href="../donations">Donated Lists</a></li>
+            <li><a href="../logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Filter -->
+    <div class="container">
+        <div class="filter-container">
+            <form method="GET">
+                <select name="status" onchange="this.form.submit()" class="form-select">
+                    <option value="all" {% if status == "all" %}selected{% endif %}>All</option>
+                    <option value="paid" {% if status == "paid" %}selected{% endif %}>Paid</option>
+                    <option value="pending" {% if status == "pending" %}selected{% endif %}>Pending</option>
+                </select>
+            </form>
+        </div>
+
+        <h2><i class="fas fa-list"></i> Donation List</h2>
+
+        <!-- Donation Table -->
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Donor Name</th>
+                    <th>Email</th>
+                    <th>Cause</th>
+                    <th>Category</th>
+                    <th>Amount ($)</th>
+                    <th>Date</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donation in donations %}
+                <tr>
+                    <td>{{ donation.donor_name }}</td>
+                    <td>{{ donation.donor_email }}</td>
+                    <td>{{ donation.cause.title }}</td>
+                    <td>{{ donation.category.name }}</td>
+                    <td><strong>${{ donation.amount }}</strong></td>
+                    <td>{{ donation.date|date:"F d, Y" }}</td>
+                    <td>
+                        {% if donation.payment_status %}
+                            <span class="paid">Paid</span>
+                        {% else %}
+                            <span class="pending">Pending</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No donations found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
